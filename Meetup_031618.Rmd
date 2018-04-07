@@ -1,0 +1,61 @@
+---
+title: 'Meetup'
+author: "Lange Kaupinen"
+date: "March 16, 2018"
+output: word_document
+---
+
+```{r, include=FALSE}
+# Load Libraries
+library(quantmod)
+library(TTR)
+library(dplyr)
+library(plyr)
+library(tidyverse)
+library(tidyr)
+library(rbokeh)
+library(ggplot2)
+library(shiny)
+library(shinydashboard)
+library(lubridate)
+library(readr)
+library(stringr)
+library(purrr)
+library(magrittr)
+library(modelr)
+```
+
+Report from Data Science Meetup: Attend a Data Science Meetup of your choice and tell the class briefly what you learned. Turn in a short report (a few paragraphs) on the event and what you learned.
+
+**Topic**  
+Getting Started in Algorithmic Trading
+
+**Sponsor**  
+Washington Algorithmic Trading, Interactive Brokers, and Quantopian
+
+**Speaker**  
+Max Margenot, Academia & Data Science Lead, Quantopian
+
+**Background**  
+The objective of this Meetup was to demonstrate to participants how to develop a turnkey Trading Algorithm. The speaker began by discussing the initial research stage, the area he believes requires the most work. More specifically, he highlighted the enormous amount of publicly available financial data and the competitiveness of market place. Given that, he spoke of the importance of trying to uncover an "informational inefficiency" through use of alternative data sets such as sentiment analysis, machine learning models, and geospatial data.
+
+For this particular demonstration, he chose to build a model using sentiment analysis developed from data obtained from Stocktwits forums.
+
+**Model Goal**  
+Create an investment factor independent of previously established market and style risk factors.
+
+**Process**  
+Max spent the next hour or so taking us through the beginning to end process of developing, testing, and evaluating the trading program.
+
+Post the previously mentioned research stage, Max next went onto to define his investable universe as all publicly traded stocks that currently listed on U.S. Exchanges (a universe of ~3,600 securities). Next he went on to narrow the universe to only the top and bottom 350 securities as determined by its sentiment score. He further refined his addressable market by assigning an industry sector and style factor to each of the securities (of which there are currently 11 different industry types and five factors in which securities can be grouped).
+
+With the parameters now defined, he established a bull and bear score for each of the securities in order to establish predictive power for his trading signal. He then refined his target purchase and short sales by removing all but the top and bottom 10 securities as ranked by his bull and bear score. Position sizing of these 20 securities was then determined by a "max alpha" vector that attempts to maximize the ends of the vector (i.e., highest allocation is given to the highest conviction bull and bear scores and vice versa).
+
+The program was then tested over three different trading periods with a daily systematic rebalance done prior to the opening of the U.S. markets.
+
+Prior to sharing the strategy's performance metrics, he gave a brief overview on the portfolio and risk parameters of the program. More specifically, the strategy is intended to be market neutral, which simply means it has equal allocations to both long and short positions with the goal of eliminating equity market beta. The strategy carried little to no leverage, had tight positions caps (i.e,. positions limited to 2.5% of the risk of the portfolio), and limited it's turnover to 85% per day (which is very high for a traditional portfolio but considered reasonable for a quant fund rebalancing on a daily basis).
+
+He concluded his presentation by going through the strategy's performance metrics from the beginning of 2016 through year-end 2017. Overall, the backtest showed the strategy to be mostly successful as to it's intent. Although the annualized return was only ~3.0, it did so with very low volatility, a maximum drawdown of -4.09%, and an equity beta (relative to the S&P 500) of -0.04.
+  
+**Conclusion**  
+Overall, I thought the presenter as well as the content was excellent, and would highly recommend it to any beginning or intermediate quant.
